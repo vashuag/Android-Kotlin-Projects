@@ -9,6 +9,35 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var resultTextView: TextView
 
+    private fun evaluateExpression(expression: String): Double {
+        val parts = expression.split("+", "-", "*", "/")
+        val numbers = mutableListOf<Double>()
+        val operators = mutableListOf<Char>()
+
+        for (part in parts) {
+            numbers.add(part.toDouble())
+        }
+
+        for (i in 1 until expression.length) {
+            val c = expression[i]
+            if (c == '+' || c == '-' || c == '*' || c == '/') {
+                operators.add(c)
+            }
+        }
+
+        for (i in 0 until operators.size) {
+            val operator = operators[i]
+            when (operator) {
+                '+' -> numbers[i + 1] = numbers[i] + numbers[i + 1]
+                '-' -> numbers[i + 1] = numbers[i] - numbers[i + 1]
+                '*' -> numbers[i + 1] = numbers[i] * numbers[i + 1]
+                '/' -> numbers[i + 1] = numbers[i] / numbers[i + 1]
+            }
+        }
+
+        return numbers.last()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -73,32 +102,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun evaluateExpression(expression: String): Double {
-        val parts = expression.split("+", "-", "*", "/")
-        val numbers = mutableListOf<Double>()
-        val operators = mutableListOf<Char>()
 
-        for (part in parts) {
-            numbers.add(part.toDouble())
-        }
-
-        for (i in 1 until expression.length) {
-            val c = expression[i]
-            if (c == '+' || c == '-' || c == '*' || c == '/') {
-                operators.add(c)
-            }
-        }
-
-        for (i in 0 until operators.size) {
-            val operator = operators[i]
-            when (operator) {
-                '+' -> numbers[i + 1] = numbers[i] + numbers[i + 1]
-                '-' -> numbers[i + 1] = numbers[i] - numbers[i + 1]
-                '*' -> numbers[i + 1] = numbers[i] * numbers[i + 1]
-                '/' -> numbers[i + 1] = numbers[i] / numbers[i + 1]
-            }
-        }
-
-        return numbers.last()
-    }
 }
