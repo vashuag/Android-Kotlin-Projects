@@ -20,6 +20,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdk 33
@@ -42,7 +43,7 @@ android {
     buildFeatures {
         dataBinding true
     }
-    buildToolsVersion '32.0.0 rc1'
+    buildToolsVersion '32'
 }
 
 dependencies {
@@ -50,7 +51,7 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-
+    implementation "com.google.android.material:material:1.8.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$supportlibVersion"
